@@ -1,0 +1,26 @@
+<?php
+$add_user_email=$_GET["email"];
+$add_user_name=$_GET["name"];
+$add_user_password=$_GET["psw"];
+$dbHost = "localhost";
+$dbUsername = "root";
+$dbPassword = "";
+$dbname = "user";
+ 
+$conn = mysqli_connect($dbHost, $dbUsername, $dbPassword, $dbname);
+// Check connection
+if (!$conn) 
+{
+  die("Connection failed: " . mysqli_connect_error());
+}
+//apply insert query on add user layout
+$sql = "INSERT INTO user_db(user_id,user_name,user_email,user_password,created_at,updated_at) VALUES(NULL, '$add_user_name','$add_user_email','$add_user_password' , current_timestamp(), current_timestamp()) ";
+
+$result = mysqli_query($conn, $sql);
+if (!$result)
+{
+  die('Error: ' . mysqli_connect_error());
+}
+echo "<h2>You added record of ".$add_user_name . "</h2>";
+mysqli_close($conn);
+?>
